@@ -78,6 +78,9 @@ spl.set_xlabel("Number of components")
 spl.legend([b[0] for b in bars], cv_types)
 
 
+
+'''3. Determine the minimum number of clusters that best represent the dataset using either AIC or BIC.'''
+
 best_gmm = mixture.GaussianMixture(
             n_components=3, covariance_type="full"
         )
@@ -85,7 +88,7 @@ best_gmm.fit(pca_X_train)
 clf = best_gmm
 
 
-'''3. Determine the minimum number of clusters that best represent the dataset using either AIC or BIC.'''
+'''4. Plot the results from (2) and (3). '''
 # Plot the winner
 splot = plt.subplot(2, 1, 2)
 Y_ = clf.predict(pca_X_train)
@@ -103,9 +106,7 @@ for i, (mean, cov, color) in enumerate(zip(clf.means_, clf.covariances_, color_i
     ell.set_clip_box(splot.bbox)
     ell.set_alpha(0.5)
     splot.add_artist(ell)
-    
-    
-'''4. Plot the results from (2) and (3). '''
+
 plt.xticks(())
 plt.yticks(())
 plt.title(
